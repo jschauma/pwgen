@@ -1,0 +1,55 @@
+<html>
+  <head>
+    <title>pwgen -- a password/passphrase generator</title>
+    <link rel="stylesheet" type="text/css" href="pwgen.css">
+  </head>
+  <body>
+  <h1>pwgen -- a password/passphrase generator</h1>
+  <hr>
+  <h2>What is this?</h2>
+  <p><a href="index.cgi">This page</a> will generate for you -- just you! --
+  a unique, artisanal, hand-crafted passphrase.  By default, the passphrase
+  will consist of 4 english words, hopefully allowing you to be able to
+  memorize it while at the same time providing sufficient entropy to make
+  it reasonably secure.</P>
+  <p>You may be familiar with this concept from <a href="https://xkcd.com/936/">this
+  xkcd comic</a>.</p>
+  <h2>I don't like the HTML.</h2>
+  <p>Yeah, I know.  I don't even CSS, really.</p>
+  <p>If you want just your unique, artisanal, hand-crafted passphrase
+  <a href="index.cgi?nohtml=1">pass nohtml=1</a> in your request.</p>
+  <h2>So these are good passwords, then?</h2>
+  <p>
+  Not necessarily.  They are generated on a VM using the
+  operating system's PRNG which was seeded in who knows what manner.  The
+  wordlists contains 5K words each, but if the attacker knew that you're
+  generating exactly four words and they know your acrostic word (if any),
+  then this wouldn't be a very strong password.
+  </p>
+  <p>
+  <em>However</em>, these passphrases might still be better than any
+  passphrase you come up with yourself, because unfortunately humans
+  are rather predictable and would generate low-entropy passphrases
+  even using this schema.
+  </p>
+  <p>
+  In the end, you shouldn't even need this generator at all.  Use a
+  password manager, like <a href="https://agilebits.com/onepassword">1Password</a>,
+  <a href="https://lastpass.com/">lastpass</a>, <a href="https://www.dashlane.com/">Dashlane</a>,
+  or something like that.
+  </p>
+  <p>
+  <b>The best password is one that you don't even know.</b>
+  </p>
+  <h2>How was this implemented?</h2>
+  <p>This site uses the <a href="https://github.com/redacted/XKCD-password-generator">XKCD-password-generator</a>
+  for generation of xkcd style passphrases.</p>
+  <p>For the generation of complex passwords, it basically runs:
+<blockquote><pre><tt>tr -dc 'A-Za-z0-9`~!@#$%^&amp;*()_+[]{}\|;:?,./' &lt; /dev/urandom \
+        | head -c ${num} | xargs</tt></pre></blockquote>
+  <p>The code for this site is available on Git in
+  <a href="https://github.com/jschauma/pwgen">https://github.com/jschauma/pwgen</a>.</p>
+  <hr>
+  [Made by <a href="https://twitter.com/jschauma">@jschauma</a>&nbsp;|&nbsp;[<a href="index.cgi">Try it out</a>]&nbsp;|&nbsp;[<a href="/blog/">Other Signs of Triviality</a>]
+  </body>
+</html>
